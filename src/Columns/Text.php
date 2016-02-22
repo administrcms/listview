@@ -1,6 +1,6 @@
 <?php
 
-namespace Administr\Listview\Columns;
+namespace Administr\ListView\Columns;
 
 class Text extends Column
 {

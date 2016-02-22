@@ -1,9 +1,9 @@
 <?php
 
-namespace Administr\Listview;
+namespace Administr\ListView;
 
 
-use Administr\Listview\Contracts\Column;
+use Administr\ListView\Contracts\Column;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;

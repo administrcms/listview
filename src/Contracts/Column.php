@@ -1,6 +1,6 @@
 <?php
 
-namespace Administr\Listview\Contracts;
+namespace Administr\ListView\Contracts;
 
 
 interface Column

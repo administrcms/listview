@@ -1,6 +1,6 @@
 <?php
 
-namespace Administr\Listview;
+namespace Administr\ListView;
 
 
 use Illuminate\Support\ServiceProvider;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Administr\Listview\Columns;
+namespace Administr\ListView\Columns;
 
-use Administr\Listview\Contracts\Column as ColumnContract;
+use Administr\ListView\Contracts\Column as ColumnContract;
 use Carbon\Carbon;
 
 abstract class Column implements ColumnContract

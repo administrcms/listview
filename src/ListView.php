@@ -12,6 +12,7 @@ class ListView
 {
     protected $dataSource = null;
     protected $columns = [];
+    protected $options = [];
 
     public function __construct($dataSource = null)
     {
@@ -88,6 +89,22 @@ class ListView
         }
 
         return $values;
+    }
+
+    public function __get($name)
+    {
+        if(array_key_exists($name, $this->options))
+        {
+            return $this->options[$name];
+        }
+
+        return null;
+    }
+
+    public function __set($name, $value)
+    {
+        $this->options[$name] = $value;
+        return $this;
     }
 
     public function __call($name, $args = [])

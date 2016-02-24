@@ -1,4 +1,4 @@
-<table {{ $attrs }}>
+<table {!! $attrs !!}>
 
     <tr>
         @foreach($columns as $column)
@@ -8,9 +8,9 @@
 
     @foreach($values as $value)
         <tr>
-        @foreach($columns as $column)
-            <td>{{ $column->getValue($value[$column->getName()]) }}</td>
-        @endforeach
+            @foreach($columns as $column)
+                <td>{{ $column->getValue($value[$column->getName()]) }}</td>
+            @endforeach
         </tr>
     @endforeach
 

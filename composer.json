@@ -3,7 +3,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "nesbot/carbon": "^1.21"
+        "nesbot/carbon": "^1.21",
+        "administrcms/form": "*"
     },
     "autoload": {
         "psr-4": {

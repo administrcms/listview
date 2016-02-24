@@ -1,4 +1,4 @@
-<table>
+<table {{ $attrs }}>
 
     <tr>
         @foreach($columns as $column)

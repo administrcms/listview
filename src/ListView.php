@@ -3,6 +3,7 @@
 namespace Administr\ListView;
 
 
+use Administr\Form\RenderAttributesTrait;
 use Administr\ListView\Contracts\Column;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,8 @@ use Illuminate\Support\Collection;
 
 class ListView
 {
+    use RenderAttributesTrait;
+
     protected $dataSource = null;
     protected $columns = [];
     protected $options = [];
@@ -27,8 +30,9 @@ class ListView
     {
         $columns = $this->columns;
         $values = $this->getValues();
+        $attrs = $this->renderAttributes($this->options);
 
-        return view('administr.listview::list', compact('columns', 'values'));
+        return view('administr.listview::list', compact('columns', 'values', 'attrs'));
     }
 
     public function add(Column $column)

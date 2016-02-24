@@ -113,10 +113,10 @@ class ListView
 
     public function __call($name, $args = [])
     {
-        $class = '\Administr\Listview\Columns\\' . studly_case($name);
+        $class = '\Administr\ListView\Columns\\' . studly_case($name);
 
         if(!class_exists($class)) {
-            $class = '\Administr\Listview\Columns\Text';
+            $class = '\Administr\ListView\Columns\Text';
         }
 
         if(count($args) === 2)

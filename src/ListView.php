@@ -45,7 +45,7 @@ class ListView
     public function add(Column $column)
     {
         $this->columns[$column->getName()] = $column;
-        return $this;
+        return $column;
     }
 
     public function define(\Closure $definition)

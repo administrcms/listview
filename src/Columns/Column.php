@@ -4,6 +4,7 @@ namespace Administr\ListView\Columns;
 
 use Administr\ListView\Contracts\Column as ColumnContract;
 use Carbon\Carbon;
+use Closure;
 
 abstract class Column implements ColumnContract
 {
@@ -19,7 +20,12 @@ abstract class Column implements ColumnContract
         $this->options = $options;
     }
 
-    public function format(\Closure $formatter)
+    public function define(Closure $definition)
+    {
+        $definition($this);
+    }
+
+    public function format(Closure $formatter)
     {
         $formatter($this);
     }

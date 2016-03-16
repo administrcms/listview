@@ -7,6 +7,7 @@ use Administr\Form\RenderAttributesTrait;
 use Administr\ListView\Contracts\Column;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class ListView
@@ -32,7 +33,13 @@ class ListView
         $values = $this->getValues();
         $attrs = $this->renderAttributes($this->options);
 
-        return view('administr.listview::list', compact('columns', 'values', 'attrs'));
+        $paginationLinks = null;
+
+        if( $this->dataSource instanceof LengthAwarePaginator ) {
+            $paginationLinks = $this->dataSource->links();
+        }
+
+        return view('administr.listview::list', compact('columns', 'values', 'attrs', 'paginationLinks'));
     }
 
     public function add(Column $column)
@@ -84,6 +91,11 @@ class ListView
                     return $item->toArray();
                 })
                 ->toArray();
+        }
+
+        if($this->dataSource instanceof LengthAwarePaginator) {
+            $data = $this->dataSource->toArray();
+            $data = $data['data'];
         }
 
         foreach ($data as $index => $item) {

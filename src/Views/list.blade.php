@@ -1,23 +1,37 @@
 <table {!! $attrs !!}>
 
-    <tr>
-        @foreach($columns as $column)
-            <th>{{ $column->getLabel() }}</th>
-        @endforeach
-    </tr>
-
-    @foreach($values as $value)
+    <thead>
         <tr>
             @foreach($columns as $column)
-                <td>{{ $column->getValue($value[$column->getName()]) }}</td>
+                <th>{{ $column->getLabel() }}</th>
             @endforeach
         </tr>
-    @endforeach
+    </thead>
 
-    <tr>
-        @foreach($columns as $column)
-            <th>{{ $column->getLabel() }}</th>
+    <tbody>
+        @foreach($values as $value)
+            <tr>
+                @foreach($columns as $column)
+                    <td>{{ $column->getValue($value[$column->getName()]) }}</td>
+                @endforeach
+            </tr>
         @endforeach
-    </tr>
+    </tbody>
 
+    <tfoot>
+        <tr>
+            @foreach($columns as $column)
+                <th>{{ $column->getLabel() }}</th>
+            @endforeach
+        </tr>
+
+        @if($paginationLinks)
+            <tr>
+                <td colspan="{{ count($columns) }}">
+                    {!! $paginationLinks !!}
+                </td>
+            </tr>
+        @endif
+
+    </tfoot>
 </table>

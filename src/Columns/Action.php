@@ -15,6 +15,7 @@ class Action extends Column
     public function setGlobal()
     {
         $this->options['isGlobal'] = true;
+        return $this;
     }
 
     public function isGlobal()
@@ -22,8 +23,10 @@ class Action extends Column
         return (bool)$this->options['isGlobal'];
     }
 
-    public function setUrl($url)
+    public function url($url)
     {
         $this->options['url'] = $url;
+        return $this;
+    }
     }
 }

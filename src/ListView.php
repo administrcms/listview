@@ -53,10 +53,10 @@ class ListView
         return $column;
     }
 
-    public function action(Action $action)
+    public function action($name, $label, array $options = [])
     {
-        $this->actions[$action->getName()] = $action;
-        return $action;
+        $this->actions[$name] = new Action($name, $label, $options);
+        return $this->actions[$name];
     }
 
     public function define(\Closure $definition)

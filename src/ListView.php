@@ -120,17 +120,17 @@ class ListView
 
     public function getActions($type = 'context')
     {
-        $actions = [];
+        $filter = function(Action $action) {
+            return !$action->isGlobal();
+        };
 
-        foreach($this->actions as $action) {
-            if($type === 'global' && $action->isGlobal()) {
-                $actions[] = $action;
-            } else {
-                $actions[] = $action;
-            }
+        if($type === 'global') {
+            $filter = function(Action $action) {
+                return $action->isGlobal();
+            };
         }
 
-        return $actions;
+        return array_filter($this->actions, $filter);
     }
 
     public function __get($name)

@@ -5,12 +5,11 @@
             @foreach($columns as $column)
                 <th>{{ $column->getLabel() }}</th>
             @endforeach
-        </tr>
-        @if(count($contextActions) > 0)
-            <tr>
+
+            @if(count($contextActions) > 0)
                 <th></th>
-            </tr>
-        @endif
+            @endif
+        </tr>
     </thead>
 
     <tbody>
@@ -19,20 +18,19 @@
                 @foreach($columns as $column)
                     <td>{{ $column->getValue($value[$column->getName()]) }}</td>
                 @endforeach
+
+                @if(count($contextActions) > 0)
+                    <td>
+                        @foreach($contextActions as $action)
+                            <a href="{{ $action->url }}" class="btn btn-default">
+                                <span class="{{ $action->icon }}"></span>
+                                {{ $action->getLabel() }}
+                            </a>
+                        @endforeach
+                    </td>
+                @endif
             </tr>
         @endforeach
-        @if(count($contextActions) > 0)
-            <tr>
-                <td>
-                    @foreach($contextActions as $action)
-                        <a href="{{ $action->url }}" class="btn btn-default">
-                            <span class="{{ $action->icon }}"></span>
-                            {{ $action->getLabel() }}
-                        </a>
-                    @endforeach
-                </td>
-            </tr>
-        @endif
     </tbody>
 
     <tfoot>
@@ -44,7 +42,7 @@
 
         @if($paginationLinks)
             <tr>
-                <td colspan="{{ count($columns) + count($contextActions) }}">
+                <td colspan="@if(count($contextActions) > 0){{ count($columns) + 1 }}@else{{ count($columns) }}@endif">
                     {!! $paginationLinks !!}
                 </td>
             </tr>

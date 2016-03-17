@@ -28,5 +28,10 @@ class Action extends Column
         $this->options['url'] = $url;
         return $this;
     }
+
+    public function icon($icon)
+    {
+        $this->options['icon'] = $icon;
+        return $this;
     }
 }

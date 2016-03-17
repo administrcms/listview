@@ -70,4 +70,18 @@ abstract class Column implements ColumnContract
 
         return $default;
     }
+
+    public function __get($name)
+    {
+        if(array_key_exists($name, $this->options)) {
+            return $this->options[$name];
+        }
+
+        return null;
+    }
+
+    public function __set($name, $value)
+    {
+        $this->options[$name] = $value;
+    }
 }

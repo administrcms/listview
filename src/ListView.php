@@ -4,6 +4,7 @@ namespace Administr\ListView;
 
 
 use Administr\Form\RenderAttributesTrait;
+use Administr\ListView\Columns\Action;
 use Administr\ListView\Contracts\Column;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ class ListView
 
     protected $dataSource = null;
     protected $columns = [];
+    protected $actions = [];
     protected $options = [];
 
     public function __construct($dataSource = null)
@@ -33,19 +35,28 @@ class ListView
         $values = $this->getValues();
         $attrs = $this->renderAttributes($this->options);
 
+        $globalActions = $this->getActions('global');
+        $contextActions = $this->getActions('context');
+
         $paginationLinks = null;
 
         if( $this->dataSource instanceof LengthAwarePaginator ) {
             $paginationLinks = $this->dataSource->links();
         }
 
-        return view('administr.listview::list', compact('columns', 'values', 'attrs', 'paginationLinks'));
+        return view('administr.listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'contextActions'));
     }
 
     public function add(Column $column)
     {
         $this->columns[$column->getName()] = $column;
         return $column;
+    }
+
+    public function action(Action $action)
+    {
+        $this->actions[$action->getName()] = $action;
+        return $action;
     }
 
     public function define(\Closure $definition)
@@ -105,6 +116,21 @@ class ListView
         }
 
         return $values;
+    }
+
+    public function getActions($type = 'context')
+    {
+        $actions = [];
+
+        foreach($this->actions as $action) {
+            if($type === 'global' && $action->isGlobal()) {
+                $actions[] = $action;
+            } else {
+                $actions[] = $action;
+            }
+        }
+
+        return $actions;
     }
 
     public function __get($name)

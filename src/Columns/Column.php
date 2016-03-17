@@ -11,6 +11,7 @@ abstract class Column implements ColumnContract
     protected $name;
     protected $label;
     protected $value;
+    protected $definition = null;
     protected $options = [];
 
     public function __construct($name, $label, array $options = [])
@@ -22,12 +23,20 @@ abstract class Column implements ColumnContract
 
     public function define(Closure $definition)
     {
-        $definition($this);
+        $this->definition = $definition;
+        return $this;
     }
 
     public function format(Closure $formatter)
     {
         $formatter($this);
+    }
+
+    public function render($item = null)
+    {
+        if($this->definition instanceof Closure) {
+            call_user_func_array($this->definition, [$this, $item]);
+        }
     }
 
     public function getName()
@@ -42,6 +51,7 @@ abstract class Column implements ColumnContract
 
     public function getValue($value)
     {
+        $this->render();
         return $value;
     }
 

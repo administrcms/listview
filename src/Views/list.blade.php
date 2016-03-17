@@ -22,6 +22,7 @@
                 @if(count($contextActions) > 0)
                     <td>
                         @foreach($contextActions as $action)
+                            {{ $action->render($value) }}
                             <a href="{{ $action->url }}" class="btn btn-default">
                                 <span class="{{ $action->icon }}"></span>
                                 {{ $action->getLabel() }}

@@ -9,6 +9,7 @@ use Administr\ListView\Contracts\Column;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class ListView
@@ -111,7 +112,13 @@ class ListView
 
         foreach ($data as $index => $item) {
             foreach ($this->columns as $column) {
-                $values[$index][$column->getName()] = array_key_exists($column->getName(), $item) ? $item[$column->getName()] : null;
+                if(Arr::has($item, $column->getName()))
+                {
+                    $values[$index][$column->getName()] = Arr::get($item, $column->getName());
+                    continue;
+                }
+
+                $values[$index][$column->getName()] = null;
             }
         }
 

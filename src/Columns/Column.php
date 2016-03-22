@@ -74,12 +74,12 @@ abstract class Column implements ColumnContract
 
     public function getValue($value)
     {
-        $this->render();
+        if(count($this->formatters) === 0) {
+            return $value[$this->getName()];
+        }
 
-        if(count($this->formatters) > 0) {
-            foreach ($this->formatters as $formatter) {
-                $value = $this->resolveFormatter($formatter, $value);
-            }
+        foreach ($this->formatters as $formatter) {
+            $value = $this->resolveFormatter($formatter, $value);
         }
 
         return $value;

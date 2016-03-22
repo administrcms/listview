@@ -28,7 +28,7 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
-    public function format(Closure $formatter)
+    public function format($formatter)
     {
         $this->formatters[] = $formatter;
         return $this;

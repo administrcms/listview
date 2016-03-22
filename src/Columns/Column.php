@@ -12,6 +12,7 @@ abstract class Column implements ColumnContract
     protected $label;
     protected $value;
     protected $definition = null;
+    protected $formatters = [];
     protected $options = [];
 
     public function __construct($name, $label, array $options = [])
@@ -29,7 +30,8 @@ abstract class Column implements ColumnContract
 
     public function format(Closure $formatter)
     {
-        $formatter($this);
+        $this->formatters[] = $formatter;
+        return $this;
     }
 
     public function render($item = null)
@@ -52,6 +54,35 @@ abstract class Column implements ColumnContract
     public function getValue($value)
     {
         $this->render();
+
+        if(count($this->formatters) > 0) {
+            foreach ($this->formatters as $formatter) {
+                $value = $this->resolveFormatter($formatter, $value);
+            }
+        }
+
+        return $value;
+    }
+
+    protected function resolveFormatter($formatter, $value) {
+
+        // Run the callback
+        if($formatter instanceof Closure) {
+            return call_user_func_array($formatter, [$this, $value]);
+        }
+
+        // Passed a class, make instance and call the format method
+        if(class_exists($formatter)) {
+            return (new $formatter)->format($value);
+        }
+
+        // Passed a key that has to be matched to a class
+        $formatters = config('administr.listview.formatters');
+        if(array_key_exists($formatter, $formatters)) {
+            return (new $formatters[$formatter])->format($value);
+        }
+
+        // No formatter, return value
         return $value;
     }
 

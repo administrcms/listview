@@ -40,12 +40,18 @@ abstract class Column implements ColumnContract
     /**
      * Format the output of the column.
      *
-     * @param string|Closure $formatter
+     * @param string|array|Closure $formatter
      * @return $this
      */
     public function format($formatter)
     {
-        $this->formatters[] = $formatter;
+        if(is_string($formatter) || $formatter instanceof Closure)
+        {
+            $formatter = func_get_args();
+        }
+
+        $this->formatters = array_merge($this->formatters, $formatter);
+
         return $this;
     }
 

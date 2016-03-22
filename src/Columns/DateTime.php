@@ -7,6 +7,7 @@ class DateTime extends Column
 {
     public function getValue($value)
     {
+        $value = parent::getValue($value);
         return $this
             ->toCarbon($value)
             ->format(

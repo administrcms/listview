@@ -6,6 +6,7 @@ class Boolean extends Column
 {
     public function getValue($value)
     {
-        return (bool)$value;
+        $value = (bool)$value;
+        return parent::getValue($value);
     }
 }

@@ -16,7 +16,7 @@
         @foreach($values as $value)
             <tr>
                 @foreach($columns as $column)
-                    <td>{{ $column->getValue($value[$column->getName()]) }}</td>
+                    <td>{!! $column->getValue($value[$column->getName()]) !!}</td>
                 @endforeach
 
                 @if(count($contextActions) > 0)
@@ -25,7 +25,7 @@
                             {{ $action->render($value) }}
                             <a href="{{ $action->url }}" class="btn btn-default">
                                 <span class="{{ $action->icon }}"></span>
-                                {{ $action->getLabel() }}
+                                {!! $action->getLabel() !!}
                             </a>
                         @endforeach
                     </td>

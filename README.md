@@ -57,6 +57,22 @@ $listView->text('id', '#');
 $listView->text('name', 'Name');
 $listView->text('created_at', 'Created');
 
+// You can set formatters on each column.
+// This allows you to manipulate the output value of the column.
+// It is possible to pass multiple formatters to a columns.
+// In this example - add path to the value, if you are not
+// keeping the whole path in db. Put an image tag instead of plain text.
+// Possible values are a Closure, path to formatter class
+// that implements the *Administr\ListView\Contracts\Formatter* contract,
+// string that is mapped to a formatter class in the config file *administr.listview*
+// and an array of all above as well as multiple parameters to the method format
+$listView
+    ->text('logo_img', 'Logo')
+    ->format(function(Column $column, $value){
+        return "path/to/file/{$value}";
+    }, 'image')
+    ->format(SomeCustomFormatter::class);
+
 // Action columns
 
 // Global action

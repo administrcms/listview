@@ -7,5 +7,6 @@ return [
 
     'formatters'        => [
         'yesno' => \Administr\ListView\Formatters\YesNoFormatter::class,
+        'image' => \Administr\ListView\Formatters\ImageFormatter::class,
     ]
 ];

@@ -22,12 +22,27 @@ abstract class Column implements ColumnContract
         $this->options = $options;
     }
 
+    /**
+     * Additional definition of the column.
+     * It accepts a closure with two parameters - the column and the row data as array.
+     *
+     * It is a good place to define context actions, since you have access to the data.
+     *
+     * @param Closure $definition
+     * @return $this
+     */
     public function define(Closure $definition)
     {
         $this->definition = $definition;
         return $this;
     }
 
+    /**
+     * Format the output of the column.
+     *
+     * @param string|Closure $formatter
+     * @return $this
+     */
     public function format($formatter)
     {
         $this->formatters[] = $formatter;

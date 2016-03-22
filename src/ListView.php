@@ -120,6 +120,8 @@ class ListView
 
                 $values[$index][$column->getName()] = null;
             }
+
+            $values[$index] = array_merge($values[$index], $item);
         }
 
         return $values;

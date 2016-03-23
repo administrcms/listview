@@ -17,16 +17,23 @@
         <tr>
             @foreach($columns as $column)
                 {{ $column->setContext($value) }}
+
+                @if(!$column->hidden())
+                    <td>{!! $column->getValue($value) !!}</td>
+                @endif
             @endforeach
 
             @if(count($contextActions) > 0)
                 <td>
                     @foreach($contextActions as $action)
-                        <a href="{{ $action->url }}" class="btn btn-default">
-                            <span class="{{ $action->icon }}"></span>
-                            {!! $action->getLabel() !!}
-                        </a>
                         {{ $action->setContext($value) }}
+
+                        @if(!$action->hidden())
+                            <a href="{{ $action->url }}" class="btn btn-default">
+                                <span class="{{ $action->icon }}"></span>
+                                {!! $action->getLabel() !!}
+                            </a>
+                        @endif
                     @endforeach
                 </td>
             @endif

@@ -15,6 +15,11 @@ abstract class Column implements ColumnContract
     protected $formatters = [];
     protected $options = [];
 
+    /**
+     * @var bool
+     */
+    protected $hideIf = false;
+
     public function __construct($name, $label, array $options = [])
     {
         $this->name = $name;
@@ -105,6 +110,17 @@ abstract class Column implements ColumnContract
 
         // No formatter, return value
         return $value;
+    }
+
+    public function hideIf($condition)
+    {
+        $this->hideIf = $condition;
+        return $this;
+    }
+
+    public function hidden()
+    {
+        return (bool)$this->hideIf;
     }
 
     /**

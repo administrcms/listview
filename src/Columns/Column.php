@@ -55,7 +55,7 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
-    public function render($item = null)
+    public function setContext($item = null)
     {
         if($this->definition instanceof Closure) {
             call_user_func_array($this->definition, [$this, $item]);

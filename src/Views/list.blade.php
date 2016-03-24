@@ -18,9 +18,7 @@
             @foreach($columns as $column)
                 {{ $column->setContext($value) }}
 
-                @if(!$column->hidden())
-                    <td>{!! $column->getValue($value) !!}</td>
-                @endif
+                <td>@if(!$column->hidden()){!! $column->getValue($value) !!}@endif</td>
             @endforeach
 
             @if(count($contextActions) > 0)

@@ -15,16 +15,25 @@ abstract class Column implements ColumnContract
     protected $formatters = [];
     protected $options = [];
 
+    protected $currentRow = [];
+
     /**
      * @var bool
      */
     protected $hideIf = false;
 
-    public function __construct($name, $label, array $options = [])
+    public function __construct($name, $label, $options = null)
     {
         $this->name = $name;
         $this->label = $label;
-        $this->options = $options;
+
+        if($options instanceof Closure) {
+            $this->define($options);
+        }
+
+        if(is_array($options) && count($options) > 0) {
+            $this->options = $options;
+        }
     }
 
     /**
@@ -55,15 +64,17 @@ abstract class Column implements ColumnContract
             $formatter = func_get_args();
         }
 
-        $this->formatters = array_merge($this->formatters, $formatter);
+        $this->formatters = $formatter;
 
         return $this;
     }
 
-    public function setContext($item = null)
+    public function setContext(array $row)
     {
+        $this->currentRow = $row;
+
         if($this->definition instanceof Closure) {
-            call_user_func_array($this->definition, [$this, $item]);
+            call_user_func_array($this->definition, [$this, $this->currentRow]);
         }
     }
 
@@ -77,13 +88,21 @@ abstract class Column implements ColumnContract
         return $this->label;
     }
 
-    public function getValue(array $row)
+    /**
+     * The an associative array - key (column name) -> value.
+     *
+     * Return the value for a column or run value formatters,
+     * if defined and return their result as value.
+     *
+     * @return mixed|null
+     */
+    public function getValue()
     {
         if(count($this->formatters) === 0) {
-            return $row[$this->getName()];
+            return $this->currentRow[$this->getName()];
         }
 
-        $value = $row;
+        $value = $this->currentRow;
 
         foreach ($this->formatters as $formatter) {
             $value = $this->executeFormatter($formatter, $value);
@@ -92,11 +111,17 @@ abstract class Column implements ColumnContract
         return $value;
     }
 
+    /**
+     * Execute a value formatter.
+     *
+     * @param $formatter
+     * @param $value
+     * @return mixed
+     */
     protected function executeFormatter($formatter, $value) {
-
         // Run the callback
         if($formatter instanceof Closure) {
-            return call_user_func_array($formatter, [$this, $value]);
+            return call_user_func($formatter, $value);
         }
 
         // Passed a class, make instance and call the format method
@@ -126,6 +151,8 @@ abstract class Column implements ColumnContract
     }
 
     /**
+     * Parse value to Carbon instance.
+     *
      * @param $value
      * @return Carbon
      */
@@ -139,6 +166,9 @@ abstract class Column implements ColumnContract
     }
 
     /**
+     * Get a value format - for example,
+     * you can set a format of date / time value.
+     *
      * @param null $default
      * @return string
      */

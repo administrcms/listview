@@ -89,6 +89,10 @@ class ListView
             throw new \Exception('No data provided.');
         }
 
+        if(count($this->columns) === 0) {
+            throw new \Exception('Columns not set.');
+        }
+
         $values = [];
         $data = [];
 

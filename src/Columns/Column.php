@@ -77,20 +77,22 @@ abstract class Column implements ColumnContract
         return $this->label;
     }
 
-    public function getValue($value)
+    public function getValue(array $row)
     {
         if(count($this->formatters) === 0) {
-            return $value[$this->getName()];
+            return $row[$this->getName()];
         }
 
+        $value = null;
+
         foreach ($this->formatters as $formatter) {
-            $value = $this->resolveFormatter($formatter, $value);
+            $value = $this->executeFormatter($formatter, $row);
         }
 
         return $value;
     }
 
-    protected function resolveFormatter($formatter, $value) {
+    protected function executeFormatter($formatter, $value) {
 
         // Run the callback
         if($formatter instanceof Closure) {

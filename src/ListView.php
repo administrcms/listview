@@ -51,7 +51,7 @@ class ListView
     public function add(Column $column)
     {
         $this->columns[$column->getName()] = $column;
-        return $column;
+        return $this;
     }
 
     public function action($name, $label, array $options = [])

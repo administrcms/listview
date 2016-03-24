@@ -13,18 +13,18 @@
     </thead>
 
     <tbody>
-    @foreach($values as $value)
+    @foreach($values as $row)
         <tr>
             @foreach($columns as $column)
-                {{ $column->setContext($value) }}
+                {{ $column->setContext($row) }}
 
-                <td>@if(!$column->hidden()){!! $column->getValue($value) !!}@endif</td>
+                <td>@if(!$column->hidden()){!! $column->getValue() !!}@endif</td>
             @endforeach
 
             @if(count($contextActions) > 0)
                 <td>
                     @foreach($contextActions as $action)
-                        {{ $action->setContext($value) }}
+                        {{ $action->setContext($row) }}
 
                         @if(!$action->hidden())
                             <a href="{{ $action->url }}" class="btn btn-default">

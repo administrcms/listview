@@ -83,10 +83,10 @@ abstract class Column implements ColumnContract
             return $row[$this->getName()];
         }
 
-        $value = null;
+        $value = $row;
 
         foreach ($this->formatters as $formatter) {
-            $value = $this->executeFormatter($formatter, $row);
+            $value = $this->executeFormatter($formatter, $value);
         }
 
         return $value;

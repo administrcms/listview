@@ -57,7 +57,7 @@ $listView->text('id', '#');
 $listView->text('name', 'Name');
 $listView->text('created_at', 'Created');
 
-// or like chained:
+// or chained:
 $listView
     ->text('id', '#')
     ->text('name', 'Name')

@@ -69,8 +69,8 @@ $listView
 // In this example - add path to the value, if you are not
 // keeping the whole path in db. Put an image tag instead of plain text.
 // Possible values are a Closure, path to formatter class
-// that implements the *Administr\ListView\Contracts\Formatter* contract,
-// string that is mapped to a formatter class in the config file *administr.listview*
+// that implements the Administr\ListView\Contracts\Formatter contract,
+// string that is mapped to a formatter class in the config file administr.listview
 // and an array of all above as well as multiple parameters to the method format
 $listView
     ->text('logo_img', 'Logo', function(Column $column, array $row){

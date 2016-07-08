@@ -53,9 +53,10 @@ $listView->class = 'table table-bordered table-hover';
 // and if it fails will use a simple text representation.
 // Available fields are text, boolean, date, datetime, time.
 // Date and time formats can be modified from the config file.
-$listView->text('id', '#');
-$listView->text('name', 'Name');
-$listView->text('created_at', 'Created');
+$listView
+    ->text('id', '#')
+    ->text('name', 'Name')
+    ->text('created_at', 'Created');
 
 // You can set formatters on each column.
 // This allows you to manipulate the output value of the column.
@@ -67,11 +68,12 @@ $listView->text('created_at', 'Created');
 // string that is mapped to a formatter class in the config file *administr.listview*
 // and an array of all above as well as multiple parameters to the method format
 $listView
-    ->text('logo_img', 'Logo')
-    ->format(function(Column $column, $value){
-        return "path/to/file/{$value}";
-    }, 'image')
-    ->format(SomeCustomFormatter::class);
+    ->text('logo_img', 'Logo', function(Column $column, array $row){
+        $column->format(function(array $row){
+                return "path/to/file/{$row['logo_img']}";
+            }, 'image')
+            ->format(SomeCustomFormatter::class);
+    });
 
 // Action columns
 

@@ -168,6 +168,29 @@ abstract class Column implements ColumnContract
     }
 
     /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
+    public function set($name, $value)
+    {
+        $this->options[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @return mixed|null
+     */
+    public function get($name)
+    {
+        if(array_key_exists($name, $this->options)) {
+            return $this->options[$name];
+        }
+
+        return null;
+    }
+
     /**
      * @return array
      */
@@ -176,10 +199,11 @@ abstract class Column implements ColumnContract
         if(!is_array($this->options)) {
             return [];
         }
-        
+
         return $this->options;
     }
 
+    /**
      * Get a value format - for example,
      * you can set a format of date / time value.
      *
@@ -197,15 +221,11 @@ abstract class Column implements ColumnContract
 
     public function __get($name)
     {
-        if(array_key_exists($name, $this->options)) {
-            return $this->options[$name];
-        }
-
-        return null;
+        return $this->get($name);
     }
 
     public function __set($name, $value)
     {
-        $this->options[$name] = $value;
+        return $this->set($name, $value);
     }
 }

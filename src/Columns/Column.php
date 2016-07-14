@@ -3,6 +3,8 @@
 namespace Administr\ListView\Columns;
 
 use Administr\ListView\Contracts\Column as ColumnContract;
+use Administr\Form\RenderAttributesTrait;
+
 use Carbon\Carbon;
 use Closure;
 

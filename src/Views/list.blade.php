@@ -18,7 +18,7 @@
             @foreach($columns as $column)
                 {{ $column->setContext($row) }}
 
-                <td>@if(!$column->hidden()){!! $column->getValue() !!}@endif</td>
+                <td {!! $column->renderAttributes($column->getOptions()) !!}>@if(!$column->hidden()){!! $column->getValue() !!}@endif</td>
             @endforeach
 
             @if(count($contextActions) > 0)
@@ -27,7 +27,7 @@
                         {{ $action->setContext($row) }}
 
                         @if(!$action->hidden())
-                            <a href="{{ $action->url }}" class="btn btn-default">
+                            <a href="{{ $action->url }}" {!! $action->renderAttributes($action->getOptions()) !!} class="btn btn-default">
                                 <span class="{{ $action->icon }}"></span>
                                 {!! $action->getLabel() !!}
                             </a>

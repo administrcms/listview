@@ -8,6 +8,8 @@ use Closure;
 
 abstract class Column implements ColumnContract
 {
+    use RenderAttributesTrait;
+
     protected $name;
     protected $label;
     protected $value;
@@ -166,6 +168,18 @@ abstract class Column implements ColumnContract
     }
 
     /**
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        if(!is_array($this->options)) {
+            return [];
+        }
+        
+        return $this->options;
+    }
+
      * Get a value format - for example,
      * you can set a format of date / time value.
      *

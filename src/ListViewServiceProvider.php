@@ -14,6 +14,10 @@ class ListViewServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Config/administr.listview.php' => config_path('administr.listview.php')
         ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/Views' => resource_path('views/vendor/administr/listview')
+        ], 'views');
     }
 
     /**

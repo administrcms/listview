@@ -12,6 +12,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
+/**
+ * @method ListView boolean($name, $label, array $options = [])
+ * @method ListView date($name, $label, array $options = [])
+ * @method ListView datetime($name, $label, array $options = [])
+ * @method ListView text($name, $label, array $options = [])
+ * @method ListView time($name, $label, array $options = [])
+ */
 class ListView
 {
     use RenderAttributesTrait;

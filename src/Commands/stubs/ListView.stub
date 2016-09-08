@@ -12,7 +12,7 @@ class DummyClass extends ListView
     {
         parent::__construct($dataSource);
 
-        $listView->class = 'table table-bordered table-hover';
+        $this->class = 'table table-bordered table-hover';
     }
 
     protected function columns()

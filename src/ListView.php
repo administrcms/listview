@@ -31,6 +31,8 @@ class ListView
     public function __construct($dataSource = null)
     {
         $this->setDataSource($dataSource);
+        $this->columns();
+        $this->actions();
     }
 
     /**
@@ -70,6 +72,20 @@ class ListView
     public function define(\Closure $definition)
     {
         $definition($this);
+    }
+
+    /**
+     * Setup columns
+     */
+    protected function columns()
+    {
+    }
+
+    /**
+     * Setup actions
+     */
+    protected function actions()
+    {
     }
 
     /**

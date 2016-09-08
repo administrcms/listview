@@ -5,11 +5,10 @@ namespace Administr\ListView\Columns;
 
 class DateTime extends Column
 {
-    public function getValue($value)
+    public function getValue()
     {
-        $value = parent::getValue($value);
         return $this
-            ->toCarbon($value)
+            ->toCarbon(parent::getValue())
             ->format(
                 $this->getFormat(config('administr.listview.datetime_format'))
             );

@@ -4,9 +4,8 @@ namespace Administr\ListView\Columns;
 
 class Boolean extends Column
 {
-    public function getValue($value)
+    public function getValue()
     {
-        $value = (bool)$value;
-        return parent::getValue($value);
+        return (bool)parent::getValue();
     }
 }

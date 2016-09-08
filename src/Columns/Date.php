@@ -4,11 +4,10 @@ namespace Administr\ListView\Columns;
 
 class Date extends Column
 {
-    public function getValue($value)
+    public function getValue()
     {
-        $value = parent::getValue($value);
         return $this
-            ->toCarbon($value)
+            ->toCarbon(parent::getValue())
             ->format(
                 $this->getFormat(config('administr.listview.date_format'))
             );

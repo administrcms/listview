@@ -1,0 +1,41 @@
+<?php
+
+namespace DummyNamespace;
+
+use Administr\ListView\Columns\Action;
+use Administr\ListView\ListView;
+
+class DummyClass extends ListView
+{
+    public function __construct($dataSource = null)
+    {
+        parent::construct($dataSource);
+
+        $listView->class = 'table table-bordered table-hover';
+    }
+
+    protected function columns()
+    {
+
+        $this
+            ->text('id', '#')
+            ;
+
+    }
+
+    protected function actions()
+    {
+        $listView
+            ->action('add', 'Добави')
+            ->icon('fa fa-plus')
+            ->url('')
+            ->setGlobal();
+
+        $listView
+            ->action('edit', '')
+            ->icon('fa fa-edit')
+            ->define(function(Action $action, array $item){
+                $action->url('');
+            });
+    }
+}

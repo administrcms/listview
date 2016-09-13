@@ -26,14 +26,14 @@ class DummyClass extends ListView
         $this
             ->action('add', 'Добави')
             ->icon('fa fa-plus')
-            ->url('')
+            ->url( route('app.dummyroute.create') )
             ->setGlobal();
 
         $this
             ->action('edit', '')
             ->icon('fa fa-edit')
-            ->define(function(Action $action, array $item){
-                $action->url('');
+            ->define(function(Action $action, array $row){
+                $action->url( route('app.dummyroute.edit', [$row['id']]) );
             });
     }
 }

@@ -56,6 +56,20 @@ class MakeListView extends GeneratorCommand
         $this->error("Could not create views/{$name}/{$fileName}");
     }
 
+
+    protected function replaceClass($stub, $name)
+    {
+        $stub = parent::replaceClass($stub, $name);
+
+        $noListViewName = str_replace('ListView', '', $this->getNameInput());
+        $dummyRoute = str_plural(
+            strtolower( snake_case( $noListViewName, '-' ) )
+        );
+        $stub = str_replace('dummyroute', $dummyRoute, $stub);
+
+        return $stub;
+    }
+
     /**
      * Get the stub file for the generator.
      *

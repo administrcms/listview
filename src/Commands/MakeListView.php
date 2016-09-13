@@ -29,7 +29,7 @@ class MakeListView extends GeneratorCommand
         parent::fire();
 
         $name = str_plural(
-            str_replace( '-listview', '', snake_case($this->argument('name'), '-') )
+            str_replace( '-list-view', '', snake_case($this->argument('name'), '-') )
         );
 
         $from = __DIR__ . '/stubs/list.blade.stub';

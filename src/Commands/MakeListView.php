@@ -24,6 +24,38 @@ class MakeListView extends GeneratorCommand
 
     protected $type = 'ListView class';
 
+    public function fire()
+    {
+        parent::fire();
+
+        $name = str_plural(
+            str_replace( '-listview', '', snake_case($this->argument('name'), '-') )
+        );
+
+        $from = __DIR__ . '/stubs/list.blade.stub';
+        $targetPath = resource_path("views/{$name}/");
+        $fileName = 'list.blade.php';
+
+        if( $this->files->exists($targetPath . $fileName) )
+        {
+            $this->error("File views/{$name}/{$fileName} already exists!");
+            return;
+        }
+
+        if( !$this->files->isDirectory($targetPath) )
+        {
+            $this->files->makeDirectory($targetPath);
+        }
+
+        if( $this->files->copy($from, $targetPath . $fileName) )
+        {
+            $this->info("Created views/{$name}/{$fileName}");
+            return;
+        }
+
+        $this->error("Could not create views/{$name}/{$fileName}");
+    }
+
     /**
      * Get the stub file for the generator.
      *

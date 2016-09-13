@@ -28,6 +28,8 @@ class ListView
     protected $actions = [];
     protected $options = [];
 
+    protected $request;
+
     public function __construct($dataSource = null)
     {
         $this->setDataSource($dataSource);
@@ -59,6 +61,7 @@ class ListView
 
     public function add(Column $column)
     {
+        $column->setRequest($this->request);
         $this->columns[$column->getName()] = $column;
         return $this;
     }
@@ -72,6 +75,17 @@ class ListView
     public function define(\Closure $definition)
     {
         $definition($this);
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    public function getSort()
+    {
+        return $this->request->get('sort', []);
     }
 
     /**

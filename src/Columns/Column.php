@@ -22,6 +22,11 @@ abstract class Column implements ColumnContract
     protected $currentRow = [];
 
     /**
+     * @var Illuminate\Http\Request
+     */
+    protected $request = null;
+
+    /**
      * @var bool
      */
     protected $hideIf = false;
@@ -38,6 +43,12 @@ abstract class Column implements ColumnContract
         if(is_array($options) && count($options) > 0) {
             $this->options = $options;
         }
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 
     /**

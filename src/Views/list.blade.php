@@ -3,7 +3,13 @@
     <thead>
     <tr>
         @foreach($columns as $column)
-            <th>{{ $column->getLabel() }}</th>
+            <th>
+                @if($column->isSortable())
+                    <a href="{{ $column->sortLink() }}">{{ $column->getLabel() }}  <span class="fa fa-{{ $column->sortDirection() }}"></span></a>
+                @else
+                    {{ $column->getLabel() }}
+                @endif
+            </th>
         @endforeach
 
         @if(count($contextActions) > 0)
@@ -18,7 +24,9 @@
             @foreach($columns as $column)
                 {{ $column->setContext($row) }}
 
-                <td {!! $column->renderAttributes($column->getOptions()) !!}>@if(!$column->hidden()){!! $column->getValue() !!}@endif</td>
+                <td {!! $column->renderAttributes($column->getOptions()) !!}>
+                    @if($column->visible()){!! $column->getValue() !!}@endif
+                </td>
             @endforeach
 
             @if(count($contextActions) > 0)

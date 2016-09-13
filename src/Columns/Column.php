@@ -194,9 +194,14 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
+    public function visible()
+    {
+        return (bool)$this->hideIf === false;
+    }
+
     public function hidden()
     {
-        return (bool)$this->hideIf;
+        return !$this->visible();
     }
 
     /**

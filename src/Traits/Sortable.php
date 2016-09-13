@@ -5,7 +5,7 @@ namespace Administr\ListView\Traits;
 
 trait Sortable
 {
-    public function scopeSorted(Builder $query)
+    public function scopeSorted($query)
     {
         foreach (request()->get('sort', []) as $column => $sort)
         {

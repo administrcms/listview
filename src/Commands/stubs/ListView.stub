@@ -11,8 +11,7 @@ class DummyClass extends ListView
     public function __construct($dataSource = null)
     {
         parent::__construct($dataSource);
-
-        $this->class = 'table table-bordered table-hover';
+        $this->class = 'table table-bordered table-hover table-striped';
     }
 
     protected function columns()

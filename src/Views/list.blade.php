@@ -52,6 +52,11 @@
         @foreach($columns as $column)
             <th>{{ $column->getLabel() }}</th>
         @endforeach
+
+
+        @if(count($contextActions) > 0)
+            <th></th>
+        @endif
     </tr>
 
     @if($paginationLinks)

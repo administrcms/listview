@@ -3,13 +3,15 @@
     <thead>
     <tr>
         @foreach($columns as $column)
-            <th>
-                @if($column->isSortable())
-                    <a href="{{ $column->sortLink() }}">{{ $column->getLabel() }}  <span class="fa fa-{{ $column->sortDirection() }}"></span></a>
-                @else
-                    {{ $column->getLabel() }}
-                @endif
-            </th>
+            @if($column->visible())
+                <th>
+                    @if($column->isSortable())
+                        <a href="{{ $column->sortLink() }}">{{ $column->getLabel() }}  <span class="fa fa-{{ $column->sortDirection() }}"></span></a>
+                    @else
+                        {{ $column->getLabel() }}
+                    @endif
+                </th>
+            @endif
         @endforeach
 
         @if(count($contextActions) > 0)
@@ -22,11 +24,13 @@
     @foreach($values as $row)
         <tr>
             @foreach($columns as $column)
-                {{ $column->setContext($row) }}
+                @if($column->visible())
+                    {{ $column->setContext($row) }}
 
-                <td {!! $column->renderAttributes($column->getOptions()) !!}>
-                    @if($column->visible()){!! $column->getValue() !!}@endif
-                </td>
+                    <td {!! $column->renderAttributes($column->getOptions()) !!}>
+                        {!! $column->getValue() !!}
+                    </td>
+                @endif
             @endforeach
 
             @if(count($contextActions) > 0)
@@ -34,7 +38,7 @@
                     @foreach($contextActions as $action)
                         {{ $action->setContext($row) }}
 
-                        @if(!$action->hidden())
+                        @if($action->visible())
                             <a href="{{ $action->url }}" {!! $action->renderAttributes($action->getOptions()) !!} class="btn btn-default">
                                 <span class="{{ $action->icon }}"></span>
                                 {!! $action->getLabel() !!}
@@ -50,9 +54,11 @@
     <tfoot>
     <tr>
         @foreach($columns as $column)
-            <th>{{ $column->getLabel() }}</th>
-        @endforeach
 
+            @if($column->visible())
+                <th>{{ $column->getLabel() }}</th>
+            @endif
+        @endforeach
 
         @if(count($contextActions) > 0)
             <th></th>

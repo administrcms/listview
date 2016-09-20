@@ -9,7 +9,7 @@ class ListViewServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/Views', 'administr.listview');
+        $this->loadViewsFrom(__DIR__ . '/Views', 'administr/listview');
 
         $this->publishes([
             __DIR__ . '/Config/administr.listview.php' => config_path('administr.listview.php')

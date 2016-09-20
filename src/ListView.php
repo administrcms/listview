@@ -72,6 +72,21 @@ class ListView
         return $this->actions[$name];
     }
 
+    /**
+     * @param $name
+     * @return \Administr\ListView\Columns\Column
+     * @throws \Exception
+     */
+    public function column($name)
+    {
+        if(array_key_exists($name, $this->columns))
+        {
+            return $this->columns[$name];
+        }
+
+        throw new \Exception("Column {$name} not defined.");
+    }
+
     public function define(\Closure $definition)
     {
         $definition($this);

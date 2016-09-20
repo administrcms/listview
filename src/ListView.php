@@ -227,15 +227,6 @@ class ListView
             $args[] = [];
         }
 
-        if(count($args) === 3)
-        {
-            list($field, $label, $options) = $args;
-
-            $args = [
-                $field, $label, $options,
-            ];
-        }
-
         return $this->add(app($class, $args));
     }
 

@@ -186,12 +186,12 @@ class ListView
     public function getActions($type = 'context')
     {
         $filter = function(Action $action) {
-            return !$action->isGlobal();
+            return !$action->isGlobal() && $action->visible();
         };
 
         if($type === 'global') {
             $filter = function(Action $action) {
-                return $action->isGlobal();
+                return $action->isGlobal() && $action->visible();
             };
         }
 

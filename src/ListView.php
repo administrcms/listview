@@ -41,7 +41,7 @@ class ListView
 
         $this->filters = new ListViewFilters();
 
-        call_user_func([$this, 'columns'], $this->filter);
+        call_user_func([$this, 'filters'], $this->filters);
     }
 
     /**

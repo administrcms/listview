@@ -31,7 +31,7 @@ class ListView
 
     protected $request;
 
-    protected $filter;
+    protected $filters;
 
     public function __construct($dataSource = null)
     {
@@ -39,7 +39,7 @@ class ListView
         $this->columns();
         $this->actions();
 
-        $this->filter = new ListViewFilters();
+        $this->filters = new ListViewFilters();
 
         call_user_func([$this, 'columns'], $this->filter);
     }

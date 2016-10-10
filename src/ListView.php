@@ -63,7 +63,9 @@ class ListView
             $paginationLinks = $this->dataSource->links();
         }
 
-        return view('administr/listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'contextActions'));
+        $filters = $this->filters;
+
+        return view('administr/listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'contextActions', 'filters'));
     }
 
     public function add(Column $column)

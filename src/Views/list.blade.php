@@ -1,3 +1,5 @@
+{!! $filters->render() !!}
+
 <table {!! $attrs !!}>
 
     <thead>

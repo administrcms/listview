@@ -112,6 +112,11 @@ class ListView
         return $this->request->get('sort', []);
     }
 
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
     /**
      * Setup columns
      */

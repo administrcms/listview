@@ -5,6 +5,7 @@ namespace DummyNamespace;
 use Administr\ListView\Columns\Action;
 use Administr\ListView\Columns\Column;
 use Administr\ListView\ListView;
+use Administr\ListView\Filters\ListViewFilters;
 
 class DummyClass extends ListView
 {
@@ -35,5 +36,9 @@ class DummyClass extends ListView
             ->define(function(Action $action, array $row){
                 $action->url( route('app.dummyroute.edit', [$row['id']]) );
             });
+    }
+
+    protected function filters(ListViewFilters $filter)
+    {
     }
 }

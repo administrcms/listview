@@ -4,7 +4,8 @@
         "php": ">=5.5.9",
         "laravel/framework": ">=5.2",
         "nesbot/carbon": "^1.21",
-        "administrcms/form": "*"
+        "administrcms/form": "*",
+        "administrcms/listview-filters": "*"
     },
     "autoload": {
         "psr-4": {

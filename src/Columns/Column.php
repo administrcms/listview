@@ -318,6 +318,11 @@ abstract class Column implements ColumnContract
         return $this->options;
     }
 
+    public function attributes()
+    {
+        return $this->renderAttributes($this->getOptions());
+    }
+
     /**
      * Get a value format - for example,
      * you can set a format of date / time value.

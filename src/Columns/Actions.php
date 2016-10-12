@@ -5,6 +5,7 @@ namespace Administr\ListView\Columns;
 class Actions extends Column
 {
     protected $actions = [];
+    protected $view = 'administr/listview::_actions';
 
     public function action($name, $label, array $options = [])
     {
@@ -14,13 +15,10 @@ class Actions extends Column
 
     public function getValue()
     {
-        $actions = '';
-
-        foreach($this->getActions('context') as $action) {
-            $actions .= $action->getValue();
-        }
-
-        return $actions;
+        return view($this->view, [
+            'actions' => $this,
+            'contextActions' => $this->getActions('context')
+        ]);
     }
 
     public function setContext(array $row)

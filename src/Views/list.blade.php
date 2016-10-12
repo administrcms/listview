@@ -6,13 +6,7 @@
     <tr>
         @foreach($columns as $column)
             @if($column->visible())
-                <th>
-                    @if($column->isSortable())
-                        <a href="{{ $column->sortLink() }}">{{ $column->getLabel() }}  <span class="fa fa-{{ $column->sortDirection() }}"></span></a>
-                    @else
-                        {{ $column->getLabel() }}
-                    @endif
-                </th>
+                @include('administr/listview::_column')
             @endif
         @endforeach
 
@@ -56,9 +50,8 @@
     <tfoot>
     <tr>
         @foreach($columns as $column)
-
             @if($column->visible())
-                <th>{{ $column->getLabel() }}</th>
+                @include('administr/listview::_column')
             @endif
         @endforeach
 

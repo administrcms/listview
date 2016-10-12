@@ -198,6 +198,10 @@ class ListView
 
     public function getActions($type = 'context')
     {
+        if(! $actions = $this->column('actions') instanceof Actions) {
+            return [];
+        }
+        
         return $this->column('actions')->getActions($type);
     }
 

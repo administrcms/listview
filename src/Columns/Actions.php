@@ -6,6 +6,12 @@ class Actions extends Column
 {
     protected $actions = [];
     protected $view = 'administr/listview::_actions';
+    
+    public function view($view)
+    {
+        $this->view = $view;
+        return $this;
+    }
 
     public function action($name, $label, array $options = [])
     {

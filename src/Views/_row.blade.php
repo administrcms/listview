@@ -4,7 +4,7 @@
             {{ $column->setContext($row) }}
 
             <td {!! $column->renderAttributes($column->getOptions()) !!}>
-                @if($action->visible())
+                @if($column->visible())
                     {!! $column->getValue() !!}
                 @endif
             </td>

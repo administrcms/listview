@@ -1,6 +1,6 @@
 # ListView package for AdministrCMS
 
-Although it is written to work with the aministr package, you can use this one as a standalone with Laravel 5.2.
+Although it is written to work with the Administr package, you can use this one as a standalone with Laravel >= 5.2.
 
 It is still a work-in-progress.
 

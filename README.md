@@ -47,10 +47,11 @@ $listView = new ListView(
 $listView->class = 'table table-bordered table-hover';
 
 // Defining a field
-// text is a type which is dynamically set
-// using the magic __call method.
+// text is a type which is dynamically set using the magic __call method.
+//
 // It will look for a field definition
-// and if it fails will use a simple text representation.
+// and if it fails, it will use simple text representation.
+//
 // Available fields are text, boolean, date, datetime, time.
 // Date and time formats can be modified from the config file.
 $listView
@@ -66,7 +67,7 @@ $listView
 
 // You can set formatters on each column.
 // This allows you to manipulate the output value of the column.
-// It is possible to pass multiple formatters to a columns.
+// It is possible to pass multiple formatters to a column.
 // In this example - add path to the value, if you are not
 // keeping the whole path in db. Put an image tag instead of plain text.
 // Possible values are a Closure, path to formatter class

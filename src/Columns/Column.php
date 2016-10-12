@@ -101,9 +101,7 @@ abstract class Column implements ColumnContract
             $sort[$this->getName()] = 'asc';
         }
 
-        $q = ['sort' => $sort];
-
-        return $this->request->fullUrlWithQuery($q);
+        return $this->request->fullUrlWithQuery(['sort' => $sort]);
     }
 
     /**

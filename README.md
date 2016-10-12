@@ -84,28 +84,31 @@ $listView
 
 // Action columns
 
-// Global action
 $listView
-    ->action('add', 'Add')
-    ->setGlobal()
-    ->icon('fa fa-plus')
-    ->url( route('resource.create') );
-
-// Context action
-// For context actions which require value for the row,
-// you can use the define method, which accepts a Closure
-// that has two parameters - the Action instance and an array
-// with the data of the current row - in the example - id, name.
-$listView
-    ->action('edit', '')
-    ->icon('fa fa-edit')
-    ->define(function(Action $action, array $item) {
-        $action->url(route('resource.edit', [$item['id']]));
+    ->actions('Actions column label', function(Actions $actions) {
+        // Global action
+        $actions
+            ->action('add', 'Add')
+            ->setGlobal()
+            ->icon('fa fa-plus')
+            ->url( route('resource.create') );
+            
+        // Context action
+        // For context actions which require value for the row,
+        // you can use the define method, which accepts a Closure
+        // that has two parameters - the Action instance and an array
+        // with the data of the current row - in the example - id, name.
+        $actions
+            ->action('edit', '')
+            ->icon('fa fa-edit')
+            ->define(function(Action $action, array $item) {
+                $action->url(route('resource.edit', [$item['id']]));
+            });
     });
     
 // Render the table with data
 $listView->render();
 
 // Getting the global actions
-$list->getActions('global');
+$listView->getActions('global');
 ```

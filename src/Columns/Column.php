@@ -51,7 +51,7 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
-    public function isSortable()
+    public function sortable()
     {
         return (bool)array_get($this->options, 'sortable');
     }

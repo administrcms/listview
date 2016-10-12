@@ -60,6 +60,15 @@ abstract class Column implements ColumnContract
     }
 
     /**
+     * @deprecated
+     * @return bool
+     */
+    public function isSortable()
+    {
+        return $this->sortable();
+    }
+
+    /**
      * Get the current sort direction as string:
      * sort-asc, sort-desc or only sort when no
      * direction is set.

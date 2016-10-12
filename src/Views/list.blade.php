@@ -18,32 +18,7 @@
 
     <tbody>
     @foreach($values as $row)
-        <tr>
-            @foreach($columns as $column)
-                @if($column->visible())
-                    {{ $column->setContext($row) }}
-
-                    <td {!! $column->renderAttributes($column->getOptions()) !!}>
-                        {!! $column->getValue() !!}
-                    </td>
-                @endif
-            @endforeach
-
-            @if(count($contextActions) > 0)
-                <td>
-                    @foreach($contextActions as $action)
-                        {{ $action->setContext($row) }}
-
-                        @if($action->visible())
-                            <a href="{{ $action->url }}" {!! $action->renderAttributes($action->getOptions()) !!} class="btn btn-default">
-                                <span class="{{ $action->icon }}"></span>
-                                {!! $action->getLabel() !!}
-                            </a>
-                        @endif
-                    @endforeach
-                </td>
-            @endif
-        </tr>
+        @include('administr/listview::_row')
     @endforeach
     </tbody>
 

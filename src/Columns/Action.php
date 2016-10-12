@@ -45,6 +45,10 @@ class Action extends Column
 
     public function getValue()
     {
+        if($this->hidden()) {
+            return;
+        }
+        
         return view($this->view, [
             'action' => $this,
         ]);

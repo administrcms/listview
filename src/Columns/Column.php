@@ -22,7 +22,7 @@ abstract class Column implements ColumnContract
     protected $currentRow = [];
 
     /**
-     * @var Illuminate\Http\Request
+     * @var \Illuminate\Http\Request
      */
     protected $request = null;
 

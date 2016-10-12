@@ -13,20 +13,20 @@
     </thead>
 
     <tbody>
-        @foreach($values as $row)
+        @forelse($values as $row)
             @include('administr/listview::_row')
-        @endforeach
+        @empty
+            <td colspan="{{ count($columns) }}">{{ config('administr.listview.empty') }}</td>
+        @endforelse
     </tbody>
 
     <tfoot>
         <tr>
-            @forelse($columns as $column)
+            @foreach($columns as $column)
                 @if($column->visible())
                     @include('administr/listview::_column')
                 @endif
-            @empty
-                <td colspan="{{ count($columns) }}">{{ config('administr.listview.empty') }}</td>
-            @endforelse
+            @endforeach
         </tr>
 
         @if($paginationLinks)

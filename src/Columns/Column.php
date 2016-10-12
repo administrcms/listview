@@ -56,6 +56,13 @@ abstract class Column implements ColumnContract
         return (bool)array_get($this->options, 'sortable');
     }
 
+    /**
+     * Get the current sort direction as string:
+     * sort-asc, sort-desc or only sort when no
+     * direction is set.
+     *
+     * @return string
+     */
     public function sortDirection()
     {
         $sort = $this->request->get('sort', []);
@@ -64,11 +71,25 @@ abstract class Column implements ColumnContract
             'sort-' . array_get($sort, $this->getName()) : 'sort';
     }
 
+    /**
+     * Take a sort direction and reverse it.
+     * null (no sort) => asc
+     * asc => desc
+     * desc => null (no sort)
+     *
+     * @param $sort
+     * @return null|string
+     */
     public function sortReverse($sort)
     {
         return $sort == 'asc' ? 'desc' : ($sort == 'desc' ? null : 'asc');
     }
 
+    /**
+     * Generate a sort link for this column.
+     *
+     * @return string
+     */
     public function sortLink()
     {
         $sort = $this->request->get('sort', []);

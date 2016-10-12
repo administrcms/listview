@@ -188,6 +188,23 @@ abstract class Column implements ColumnContract
         return $value;
     }
 
+    /**
+     * Show a column if a condition is met.
+     * 
+     * @param $condition
+     * @return Column
+     */
+    public function showIf($condition)
+    {
+        return $this->hideIf(!$condition);
+    }
+
+    /**
+     * Hide a column if a condition is met.
+     *
+     * @param $condition
+     * @return $this
+     */
     public function hideIf($condition)
     {
         $this->hideIf = $condition;

@@ -2,15 +2,13 @@
 
 namespace Administr\ListView;
 
-
 use Administr\Form\RenderAttributesTrait;
-use Administr\ListView\Columns\Action;
 use Administr\ListView\Columns\Actions;
 use Administr\ListView\Contracts\Column;
 use Administr\ListView\Filters\ListViewFilters;
 use ArrayAccess;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -57,8 +55,8 @@ class ListView
 
         $paginationLinks = null;
 
-        if( $this->dataSource instanceof LengthAwarePaginator ) {
-            $paginationLinks = $this->dataSource->links();
+        if( $this->dataSource instanceof Paginator ) {
+            $paginationLinks = $this->dataSource->render();
         }
 
         $filters = $this->filters;
@@ -174,7 +172,7 @@ class ListView
                 ->toArray();
         }
 
-        if($this->dataSource instanceof LengthAwarePaginator) {
+        if($this->dataSource instanceof Paginator) {
             $data = $this->dataSource->toArray();
             $data = $data['data'];
         }

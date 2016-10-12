@@ -8,5 +8,7 @@ return [
     'formatters'        => [
         'yesno' => \Administr\ListView\Formatters\YesNoFormatter::class,
         'image' => \Administr\ListView\Formatters\ImageFormatter::class,
-    ]
+    ],
+
+    'empty' => 'There are no records available.'
 ];

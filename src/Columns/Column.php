@@ -51,6 +51,9 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function sortable()
     {
         return (bool)array_get($this->options, 'sortable');
@@ -137,6 +140,18 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
+    /**
+     * Sets the current row that is being rendered.
+     *
+     * If a definition is present, execute it with
+     * the current row.
+     *
+     * This allows for data manipulation, like
+     * changing the value of the column - make it
+     * a link, display an image, etc.
+     *
+     * @param array $row
+     */
     public function setContext(array $row)
     {
         $this->currentRow = $row;
@@ -146,11 +161,17 @@ abstract class Column implements ColumnContract
         }
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getLabel()
     {
         return $this->label;
@@ -230,11 +251,17 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function visible()
     {
         return (bool)$this->hideIf === false;
     }
 
+    /**
+     * @return bool
+     */
     public function hidden()
     {
         return !$this->visible();

@@ -5,6 +5,7 @@ namespace Administr\ListView;
 
 use Administr\Form\RenderAttributesTrait;
 use Administr\ListView\Columns\Action;
+use Administr\ListView\Columns\Actions;
 use Administr\ListView\Contracts\Column;
 use Administr\ListView\Filters\ListViewFilters;
 use ArrayAccess;
@@ -26,7 +27,7 @@ class ListView
 
     protected $dataSource = null;
     protected $columns = [];
-    protected $actions = [];
+    protected $actions;
     protected $options = [];
 
     protected $request;
@@ -37,10 +38,8 @@ class ListView
     {
         $this->setDataSource($dataSource);
         $this->columns();
-        $this->actions();
 
         $this->filters = new ListViewFilters();
-
         call_user_func([$this, 'filters'], $this->filters);
     }
 
@@ -55,7 +54,6 @@ class ListView
         $attrs = $this->renderAttributes($this->options);
 
         $globalActions = $this->getActions('global');
-        $contextActions = $this->getActions('context');
 
         $paginationLinks = null;
 
@@ -65,7 +63,7 @@ class ListView
 
         $filters = $this->filters;
 
-        return view('administr/listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'contextActions', 'filters'));
+        return view('administr/listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'filters'));
     }
 
     public function add(Column $column)
@@ -75,10 +73,9 @@ class ListView
         return $this;
     }
 
-    public function action($name, $label, array $options = [])
+    public function actions($label, \Closure $definition)
     {
-        $this->actions[$name] = new Action($name, $label, $options);
-        return $this->actions[$name];
+        return $this->add(new Actions('actions', $label, $definition));
     }
 
     /**
@@ -121,13 +118,6 @@ class ListView
      * Setup columns
      */
     protected function columns()
-    {
-    }
-
-    /**
-     * Setup actions
-     */
-    protected function actions()
     {
     }
 
@@ -208,17 +198,7 @@ class ListView
 
     public function getActions($type = 'context')
     {
-        $filter = function(Action $action) {
-            return !$action->isGlobal() && $action->visible();
-        };
-
-        if($type === 'global') {
-            $filter = function(Action $action) {
-                return $action->isGlobal() && $action->visible();
-            };
-        }
-
-        return array_filter($this->actions, $filter);
+        return $this->column('actions')->getActions($type);
     }
 
     public function __get($name)

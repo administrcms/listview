@@ -5,6 +5,8 @@ namespace Administr\ListView\Columns;
 
 class Action extends Column
 {
+    protected $view = 'administr/listview::_action';
+
     public function __construct($name, $label, array $options = [])
     {
         $options['isGlobal'] = false;
@@ -33,5 +35,18 @@ class Action extends Column
     {
         $this->options['icon'] = $icon;
         return $this;
+    }
+
+    public function view($view)
+    {
+        $this->view = $view;
+        return $this;
+    }
+
+    public function getValue()
+    {
+        return view($this->view, [
+            'action' => $this,
+        ]);
     }
 }

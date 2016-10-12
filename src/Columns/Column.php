@@ -348,6 +348,11 @@ abstract class Column implements ColumnContract
         return $default;
     }
 
+    public function render()
+    {
+        return $this->getValue();
+    }
+
     public function __get($name)
     {
         return $this->get($name);

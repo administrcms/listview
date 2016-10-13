@@ -131,6 +131,17 @@ abstract class Column implements ColumnContract
         return $this;
     }
 
+    public function runDefinition()
+    {
+        if(! $this->definition instanceof Closure) {
+            return $this;
+        }
+
+        call_user_func_array($this->definition, [$this, $this->currentRow]);
+
+        return $this;
+    }
+
     /**
      * Format the output of the column.
      *
@@ -164,10 +175,7 @@ abstract class Column implements ColumnContract
     public function setContext(array $row)
     {
         $this->currentRow = $row;
-
-        if($this->definition instanceof Closure) {
-            call_user_func_array($this->definition, [$this, $this->currentRow]);
-        }
+        $this->runDefinition();
     }
 
     /**
@@ -239,7 +247,7 @@ abstract class Column implements ColumnContract
 
     /**
      * Show a column if a condition is met.
-     * 
+     *
      * @param $condition
      * @return Column
      */

@@ -6,7 +6,7 @@ use Administr\ListView\Columns\Action;
 use Administr\ListView\Columns\Actions;
 use Administr\ListView\Columns\Column;
 use Administr\ListView\ListView;
-use Administr\ListView\Filters\ListViewFilters;
+use Administr\Filters\Filters;
 
 class DummyClass extends ListView
 {
@@ -38,7 +38,7 @@ class DummyClass extends ListView
             ;
     }
 
-    protected function filters(ListViewFilters $filter)
+    protected function filters(Filters $filter)
     {
     }
 }

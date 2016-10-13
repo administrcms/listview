@@ -5,7 +5,7 @@ namespace Administr\ListView;
 use Administr\Form\RenderAttributesTrait;
 use Administr\ListView\Columns\Actions;
 use Administr\ListView\Contracts\Column;
-use Administr\ListView\Filters\ListViewFilters;
+use Administr\Filters\Filters;
 use ArrayAccess;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +37,7 @@ class ListView
         $this->setDataSource($dataSource);
         $this->columns();
 
-        $this->filters = new ListViewFilters();
+        $this->filters = new Filters();
         call_user_func([$this, 'filters'], $this->filters);
     }
 
@@ -120,11 +120,11 @@ class ListView
     }
 
     /**
-     * Setup ListViewFilters
+     * Setup Filters
      *
-     * @param ListViewFilters $filter
+     * @param Filters $filter
      */
-    protected function filters(ListViewFilters $filter)
+    protected function filters(Filters $filter)
     {
     }
 

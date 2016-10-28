@@ -42,15 +42,12 @@ class Actions extends Column
 
     public function getActions($type = 'context')
     {
-        if($type === 'global') {
-            $this->runDefinition();
-        }
-
         $filter = function(Action $action) {
             return !$action->isGlobal() && $action->visible();
         };
 
         if($type === 'global') {
+            $this->runDefinition();
             $filter = function(Action $action) {
                 return $action->isGlobal() && $action->visible();
             };

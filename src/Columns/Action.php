@@ -30,6 +30,11 @@ class Action extends Column
         $this->options['url'] = $url;
         return $this;
     }
+    
+    public function route($name, array $parameters = [], $absolute = true)
+    {
+        return $this->url(route($name, $parameters, $absolute));
+    }
 
     public function icon($icon)
     {
@@ -48,7 +53,7 @@ class Action extends Column
         if($this->hidden()) {
             return;
         }
-        
+
         return view($this->view, [
             'action' => $this,
         ]);

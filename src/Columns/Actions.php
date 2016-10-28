@@ -23,8 +23,6 @@ class Actions extends Column
     {
         $actions = $this->getActions('context');
 
-        $this->hideIf(count($actions) === 0);
-
         return view($this->view, [
             'actions' => $this,
             'contextActions' => $actions,

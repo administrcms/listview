@@ -4,6 +4,7 @@ namespace Administr\ListView;
 
 
 use Administr\Filters\FiltersServiceProvider;
+use Administr\ListView\Commands\MakeListView;
 use Illuminate\Support\ServiceProvider;
 
 class ListViewServiceProvider extends ServiceProvider
@@ -31,5 +32,9 @@ class ListViewServiceProvider extends ServiceProvider
         $this->app->register(FiltersServiceProvider::class);
 
         $this->mergeConfigFrom(__DIR__ . '/Config/administr.listview.php', 'administr.listview');
+
+        $this->commands([
+            MakeListView::class,
+        ]);
     }
 }

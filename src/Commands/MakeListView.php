@@ -33,7 +33,14 @@ class MakeListView extends GeneratorCommand
         );
 
         $from = __DIR__ . '/stubs/list.blade.stub';
-        $targetPath = resource_path("views/{$name}/");
+
+        $viewPath = config('administr.viewPath');
+
+        if(strlen($viewPath) > 0) {
+            $viewPath .= '/';
+        }
+
+        $targetPath = resource_path("views/{$viewPath}{$name}/");
         $fileName = 'list.blade.php';
 
         if( $this->files->exists($targetPath . $fileName) )

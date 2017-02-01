@@ -8,6 +8,6 @@ class YesNoFormatter implements Formatter
 {
     public function format($value)
     {
-        return (bool)$value ? '<span class="label label-success">да</span>' : '<span class="label label-danger">не</span>';
+        return (bool)$value ? '<span class="label label-success">' . trans('administr-listview::formatters.yesno.yes') . '</span>' : '<span class="label label-danger">' . trans('administr-listview::formatters.yesno.no') . '</span>';
     }
 }

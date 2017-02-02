@@ -22,6 +22,10 @@ class ListViewServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Views' => resource_path('views/vendor/administr/listview')
         ], 'views');
+        
+        $this->publishes([
+            __DIR__ . '/Lang' => resource_path('lang')
+        ]);
     }
 
     /**

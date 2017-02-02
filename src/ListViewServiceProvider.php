@@ -13,8 +13,6 @@ class ListViewServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/Views', 'administr/listview');
 
-        $this->loadTranslationsFrom(__DIR__ . '/Lang', 'administr-listview');
-
         $this->publishes([
             __DIR__ . '/Config/administr.listview.php' => config_path('administr.listview.php')
         ], 'config');

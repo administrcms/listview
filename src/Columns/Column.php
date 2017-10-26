@@ -237,8 +237,17 @@ abstract class Column implements ColumnContract
 
         // Passed a key that has to be matched to a class
         $formatters = config('administr.listview.formatters');
+
+        if(!str_contains($formatter, ':')) {
+            $formatter .= ':';
+        }
+
+        list($formatter, $args) = explode(':', $formatter);
+        $args = array_merge([$value], explode(',', $args));
+        
         if(array_key_exists($formatter, $formatters)) {
-            return (new $formatters[$formatter])->format($value);
+            $formatter = new $formatters[$formatter];
+            return call_user_func_array([$formatter, 'format'], $args);
         }
 
         // No formatter, return value

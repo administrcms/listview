@@ -68,8 +68,11 @@ class MakeListView extends GeneratorCommand
     {
         $stub = parent::replaceClass($stub, $name);
 
+        $prefix = config('administr.prefix');
+
         $noListViewName = str_replace('ListView', '', $this->getNameInput());
-        $dummyRoute = config('administr.prefix') . '.' . str_plural(
+        $dummyRoute =  strlen($prefix) > 0 ? $prefix . '.' : '';
+        $dummyRoute .= str_plural(
             strtolower( snake_case( $noListViewName, '-' ) )
         );
         $stub = str_replace('dummyroute', $dummyRoute, $stub);

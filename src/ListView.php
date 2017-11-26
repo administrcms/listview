@@ -234,7 +234,11 @@ class ListView
             $args[] = [];
         }
 
-        return $this->add(app($class, $args));
+        return $this->add(app($class, [
+            'name'      => $args[0],
+            'label'     => $args[1],
+            'options'   => $args[2],
+        ]));
     }
 
     public function __toString()

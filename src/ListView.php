@@ -58,7 +58,7 @@ class ListView
             $paginationLinks = $this->dataSource->render();
         }
 
-        $filters = $this->filters;
+        $filters = $this->getFilters();
 
         return view('administr/listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'filters'));
     }

@@ -55,7 +55,13 @@ class ListView
         $paginationLinks = null;
 
         if( $this->dataSource instanceof Paginator ) {
-            $paginationLinks = $this->dataSource->render();
+            $paginationLinks = $this->dataSource;
+
+            if(!is_null($this->request)) {
+                $paginationLinks->appends($this->request->input());
+            }
+
+            $paginationLinks = $paginationLinks->render();
         }
 
         $filters = $this->getFilters();

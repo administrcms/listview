@@ -9,9 +9,10 @@ class Action extends Column
 
     public function __construct($name, $label, array $options = [])
     {
-        $options['isGlobal'] = false;
-        $options['icon'] = 'fa fa-file-o';
-        parent::__construct($name, $label, $options);
+        parent::__construct($name, $label, $options + [
+            'isGlobal' => false,
+            'icon' => 'fa fa-file-o',
+        ]);
     }
 
     public function setGlobal()

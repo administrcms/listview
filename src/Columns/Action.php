@@ -17,18 +17,18 @@ class Action extends Column
 
     public function setGlobal()
     {
-        $this->options['isGlobal'] = true;
+        $this->set('isGlobal', true);
         return $this;
     }
 
     public function isGlobal()
     {
-        return (bool)$this->options['isGlobal'];
+        return (bool)$this->get('isGlobal');
     }
 
     public function url($url)
     {
-        $this->options['url'] = $url;
+        $this->set('url', $url);
         return $this;
     }
     
@@ -39,7 +39,7 @@ class Action extends Column
 
     public function icon($icon)
     {
-        $this->options['icon'] = $icon;
+        $this->set('icon', $icon);
         return $this;
     }
 

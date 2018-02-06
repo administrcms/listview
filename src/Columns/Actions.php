@@ -33,7 +33,7 @@ class Actions extends Column
     {
         parent::setContext($row);
 
-        foreach($this->actions as $action) {
+        foreach($this->getActions() as $action) {
             $action->setContext($row);
         }
     }

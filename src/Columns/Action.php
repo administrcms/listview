@@ -17,8 +17,7 @@ class Action extends Column
 
     public function setGlobal()
     {
-        $this->set('isGlobal', true);
-        return $this;
+        return $this->set('isGlobal', true);
     }
 
     public function isGlobal()
@@ -28,8 +27,7 @@ class Action extends Column
 
     public function url($url)
     {
-        $this->set('url', $url);
-        return $this;
+        return $this->set('url', $url);
     }
     
     public function route($name, array $parameters = [], $absolute = true)
@@ -39,8 +37,7 @@ class Action extends Column
 
     public function icon($icon)
     {
-        $this->set('icon', $icon);
-        return $this;
+        return $this->set('icon', $icon);
     }
 
     public function view($view)

@@ -41,12 +41,13 @@ class ListView
     }
 
     /**
+     * @param string $view
      * @return mixed
      * @throws \Exception
      */
     public function render($view = 'administr/listview::list')
     {
-        $columns = $this->columns;
+        $columns = $this->getColumns();
         $values = $this->getValues();
         $attrs = $this->renderAttributes($this->options);
 
@@ -88,9 +89,9 @@ class ListView
      */
     public function column($name)
     {
-        if(array_key_exists($name, $this->columns))
+        if(array_key_exists($name, $this->getColumns()))
         {
-            return $this->columns[$name];
+            return $this->getColumns()[$name];
         }
 
         throw new \Exception("Column {$name} not defined.");
@@ -126,6 +127,14 @@ class ListView
     }
 
     /**
+     * @return array
+     */
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    /**
      * Setup Filters
      *
      * @param Filters $filter
@@ -158,7 +167,7 @@ class ListView
             throw new \Exception('No data provided.');
         }
 
-        if(count($this->columns) === 0) {
+        if(count($this->getColumns()) === 0) {
             throw new \Exception('Columns not set.');
         }
 
@@ -184,7 +193,7 @@ class ListView
         }
 
         foreach ($data as $index => $item) {
-            foreach ($this->columns as $column) {
+            foreach ($this->getColumns() as $column) {
                 if(Arr::has($item, $column->getName()))
                 {
                     $values[$index][$column->getName()] = Arr::get($item, $column->getName());

@@ -44,7 +44,7 @@ class ListView
      * @return mixed
      * @throws \Exception
      */
-    public function render()
+    public function render($view = 'administr/listview::list')
     {
         $columns = $this->columns;
         $values = $this->getValues();
@@ -66,7 +66,7 @@ class ListView
 
         $filters = $this->getFilters();
 
-        return view('administr/listview::list', compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'filters'));
+        return view($view, compact('columns', 'values', 'attrs', 'paginationLinks', 'globalActions', 'filters'));
     }
 
     public function add(Column $column)

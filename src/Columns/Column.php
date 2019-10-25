@@ -7,6 +7,8 @@ use Administr\Form\RenderAttributesTrait;
 
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 abstract class Column implements ColumnContract
 {
@@ -56,7 +58,7 @@ abstract class Column implements ColumnContract
      */
     public function sortable()
     {
-        return (bool)array_get($this->options, 'sortable');
+        return (bool)Arr::get($this->options, 'sortable');
     }
 
     /**
@@ -79,8 +81,8 @@ abstract class Column implements ColumnContract
     {
         $sort = $this->request->get('sort', []);
 
-        return array_has($sort, $this->getName()) ?
-            'sort-' . array_get($sort, $this->getName()) : 'sort';
+        return Arr::has($sort, $this->getName()) ?
+            'sort-' . Arr::get($sort, $this->getName()) : 'sort';
     }
 
     /**
@@ -106,7 +108,7 @@ abstract class Column implements ColumnContract
     {
         $sort = $this->request->get('sort', []);
 
-        if(array_has($sort, $this->getName()))
+        if(Arr::has($sort, $this->getName()))
         {
             $sort[$this->getName()] = $this->sortReverse($sort[$this->getName()]);
         } else {
@@ -238,7 +240,7 @@ abstract class Column implements ColumnContract
         // Passed a key that has to be matched to a class
         $formatters = config('administr.listview.formatters');
 
-        if(!str_contains($formatter, ':')) {
+        if(!Str::contains($formatter, ':')) {
             $formatter .= ':';
         }
 

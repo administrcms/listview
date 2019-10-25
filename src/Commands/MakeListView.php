@@ -3,6 +3,7 @@
 namespace Administr\ListView\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -28,8 +29,8 @@ class MakeListView extends GeneratorCommand
     {
         parent::fire();
 
-        $name = str_plural(
-            str_replace( '-list-view', '', snake_case($this->argument('name'), '-') )
+        $name = Str::plural(
+            str_replace( '-list-view', '', Str::snake($this->argument('name'), '-') )
         );
 
         $from = __DIR__ . '/stubs/list.blade.stub';
@@ -72,8 +73,8 @@ class MakeListView extends GeneratorCommand
 
         $noListViewName = str_replace('ListView', '', $this->getNameInput());
         $dummyRoute =  strlen($prefix) > 0 ? $prefix . '.' : '';
-        $dummyRoute .= str_plural(
-            strtolower( snake_case( $noListViewName, '-' ) )
+        $dummyRoute .= Str::plural(
+            strtolower( Str::snake( $noListViewName, '-' ) )
         );
         $stub = str_replace('dummyroute', $dummyRoute, $stub);
 

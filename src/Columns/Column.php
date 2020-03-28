@@ -172,9 +172,9 @@ abstract class Column implements ColumnContract
      * changing the value of the column - make it
      * a link, display an image, etc.
      *
-     * @param array $row
+     * @param $row
      */
-    public function setContext(array $row)
+    public function setContext($row)
     {
         $this->currentRow = $row;
         $this->runDefinition();

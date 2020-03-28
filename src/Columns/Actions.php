@@ -29,7 +29,7 @@ class Actions extends Column
         ]);
     }
 
-    public function setContext(array $row)
+    public function setContext($row)
     {
         parent::setContext($row);
 

@@ -171,42 +171,11 @@ class ListView
             throw new \Exception('Columns not set.');
         }
 
-        $values = [];
-        $data = [];
-
-        if(is_array($this->dataSource) || $this->dataSource instanceof ArrayAccess) {
-            $data = $this->dataSource;
+        if (empty($this->getDataSource())) {
+            return [];
         }
 
-        if($this->dataSource instanceof Collection)
-        {
-            $data = $this->dataSource
-                ->map(function(Model $item){
-                    return $item->toArray();
-                })
-                ->toArray();
-        }
-
-        if($this->dataSource instanceof Paginator) {
-            $data = $this->dataSource->toArray();
-            $data = $data['data'];
-        }
-
-        foreach ($data as $index => $item) {
-            foreach ($this->getColumns() as $column) {
-                if(Arr::has($item, $column->getName()))
-                {
-                    $values[$index][$column->getName()] = Arr::get($item, $column->getName());
-                    continue;
-                }
-
-                $values[$index][$column->getName()] = null;
-            }
-
-            $values[$index] = array_merge($values[$index], $item);
-        }
-
-        return $values;
+        return $this->getDataSource();
     }
 
     public function getActions($type = 'context')

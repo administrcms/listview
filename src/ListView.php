@@ -11,6 +11,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * @method ListView boolean($name, $label, array $options = [])
@@ -207,7 +208,7 @@ class ListView
 
     public function __call($name, $args = [])
     {
-        $class = '\Administr\ListView\Columns\\' . studly_case($name);
+        $class = '\Administr\ListView\Columns\\' . Str::studly($name);
 
         if(!class_exists($class)) {
             $class = '\Administr\ListView\Columns\Text';
